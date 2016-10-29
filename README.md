@@ -3,7 +3,7 @@
 目前支持Google Play和酷安网的检查。
 # Gradle
 --------
-将这行依赖添加到 app级build.gradle，随后Sync即可完成
+将这行依赖添加到 Model级build.gradle，随后Sync即可完成
 ```groovy
 compile 'kh.android:UpdateCheckerLib:1.1.0'
 ```
@@ -16,7 +16,7 @@ compile 'kh.android:UpdateCheckerLib:1.1.0'
 --------
 同步检查更新：
 ```java
-UpdateChecker.check(要查询的市场, 要查询的包名)
+UpdateChecker.check(UpdateChecker.Market 市场，String 包名)
 ```
 返回UpdateInfo:
 ```java
@@ -27,13 +27,13 @@ getVersionName() //获取最新版本名称
 ```
 同时，也可以异步检查：
 ```java
-UpdateChecker.checkSync(市场，包名，Context，UpdateChecker.OnCheckListener);
+UpdateChecker.checkSync(UpdateChecker.Market 市场，String 包名，Context，UpdateChecker.OnCheckListener);
 ```
 ## UpdateChecker.OnCheckListener:
 UpdateChecker.OnCheckListener是异步查询接口。它有两个方法：
 ```java
 onStartCheck() //当开始查询时触发
-done(UpdateInfo, Exception) //查询完毕触发
+done(UpdateInfo,Exception) //查询完毕触发
 ```
 done()触发时，参数1是查询的结果，参数2是发生的异常。如果查询成功，会返回结果，异常为空。如果查询失败，会返回异常。
 # Licence 
