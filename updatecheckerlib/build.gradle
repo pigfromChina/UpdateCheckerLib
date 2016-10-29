@@ -26,3 +26,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'org.jsoup:jsoup:1.10.1'
 }
+apply from: "https://raw.githubusercontent.com/xiaopansky/android-library-publish-to-jcenter/master/bintrayUpload.gradle"

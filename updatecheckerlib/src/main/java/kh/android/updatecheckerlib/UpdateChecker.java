@@ -2,7 +2,6 @@ package kh.android.updatecheckerlib;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
