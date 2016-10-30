@@ -5,7 +5,7 @@
 --------
 将这行依赖添加到 Model级build.gradle，随后Sync即可完成
 ```groovy
-compile 'kh.android:UpdateCheckerLib:1.1.0'
+compile 'kh.android:updatecheckerlib:1.0'
 ```
 # 添加权限
 检查更新需要添加网络权限，如果没有，需要添加：
