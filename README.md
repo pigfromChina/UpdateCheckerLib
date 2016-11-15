@@ -44,6 +44,13 @@ onStartCheck() //当开始查询时触发
 done(UpdateInfo,Exception) //查询完毕触发
 ```
 done()触发时，参数1是查询的结果，参数2是发生的异常。如果查询成功，会返回结果，异常为空。如果查询失败，会返回异常。
+# Proguard
+使用了Jsoup解析HTML，需要再proguard-rules.pro加入：
+```
+-keep public class org.jsoup.** {
+public *;
+}
+```
 # Licence 
 ```
 Copyright (C) 2016 liangyuteng0927
