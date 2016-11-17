@@ -1,27 +1,19 @@
 # UpdateCheckerLib
 一个简单小巧的Android检查更新库，通过爬网页的方式查询应用在市场上的最新版本信息
-目前支持Google Play，酷安网和豌豆荚的检查。
-# 开始
-## 添加依赖
-### Gradle
+目前支持Google Play和酷安网的检查。
+# Gradle
+--------
+将这行依赖添加到 Model级build.gradle，随后Sync即可完成
 ```groovy
-compile 'kh.android:updatecheckerlib:1.0'
+compile 'kh.android:UpdateCheckerLib:1.1.0'
 ```
-### Maven
-```maven
-<dependency>
-  <groupId>kh.android</groupId>
-  <artifactId>updatecheckerlib</artifactId>
-  <version>1.0</version>
-  <type>pom</type>
-</dependency>
-```
-### 添加权限
+# 添加权限
 检查更新需要添加网络权限，如果没有，需要添加：
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 # 检查更新
+--------
 同步检查更新：
 ```java
 UpdateChecker.check(UpdateChecker.Market 市场，String 包名)
@@ -44,12 +36,8 @@ onStartCheck() //当开始查询时触发
 done(UpdateInfo,Exception) //查询完毕触发
 ```
 done()触发时，参数1是查询的结果，参数2是发生的异常。如果查询成功，会返回结果，异常为空。如果查询失败，会返回异常。
-# Proguard
-使用了Jsoup解析HTML，需要在proguard-rules.pro加入：
-```
--keep class org.jsoup.**
-```
-# Licence
+# Licence 
+--------
 ```
 Copyright (C) 2016 liangyuteng0927
 
