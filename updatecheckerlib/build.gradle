@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 
+def version = "1.0"
 android {
     compileSdkVersion 25
     buildToolsVersion "25"
@@ -7,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 1
         targetSdkVersion 25
-        versionCode 2
-        versionName "1.1"
+        versionCode 1
+        versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -19,6 +20,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+task deleteJar(type: Delete) {
+    delete 'libs/jar-' + version + ".jar"
+}
+
+task createJar(type: Copy) {
+    from('build/intermediates/bundles/release/')
+    into('libs/')
+    include('classes.jar')
+    rename('classes.jar', 'libs/jar-' + version + ".jar")
 }
 
 dependencies {

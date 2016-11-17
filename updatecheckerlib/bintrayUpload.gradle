@@ -107,6 +107,7 @@ bintray {
     key = bintrayApikey
     configurations = ['archives']
     pkg {
+        version 1.1
         repo = "maven"
         name = projectName
         websiteUrl = projectSiteUrl

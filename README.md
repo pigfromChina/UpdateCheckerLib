@@ -1,12 +1,14 @@
 # UpdateCheckerLib
 一个简单小巧的Android检查更新库，通过爬网页的方式查询应用在市场上的最新版本信息
 目前支持Google Play,酷安网和豌豆荚的检查。
-# Gradle
---------
-将这行依赖添加到 Model级build.gradle，随后Sync即可完成
-```groovy
-compile 'kh.android:UpdateCheckerLib:1.1.0'
-```
+
+*提交到binray坑太多，现在改用了jar*
+*去<https://github.com/liangyuteng0927/UpdateCheckerLib/releases>找*
+
+# ~~Gradle~~
+~~将这行依赖添加到 Model级build.gradle，随后Sync即可完成~~
+~~compile 'kh.android:UpdateCheckerLib:1.1.0'~~
+
 # 添加权限
 检查更新需要添加网络权限，如果没有，需要添加：
 ```xml
