@@ -1,6 +1,6 @@
 # UpdateCheckerLib
 一个简单小巧的Android检查更新库，通过爬网页的方式查询应用在市场上的最新版本信息
-目前支持Google Play和酷安网的检查。
+目前支持Google Play,酷安网和豌豆荚的检查。
 # Gradle
 --------
 将这行依赖添加到 Model级build.gradle，随后Sync即可完成
@@ -36,6 +36,11 @@ onStartCheck() //当开始查询时触发
 done(UpdateInfo,Exception) //查询完毕触发
 ```
 done()触发时，参数1是查询的结果，参数2是发生的异常。如果查询成功，会返回结果，异常为空。如果查询失败，会返回异常。
+# Proguard
+使用了Jsoup解析HTML，需要再proguard-rules.pro加入：
+```
+-keep class org.jsoup.**
+```
 # Licence 
 --------
 ```
