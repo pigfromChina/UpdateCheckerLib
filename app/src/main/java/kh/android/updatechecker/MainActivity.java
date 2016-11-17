@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity implements UpdateChecker.OnC
                 UpdateChecker.checkSync(UpdateChecker.Market.MARKET_GOOGLEPLAY, mEditTextPackageName.getText().toString(), MainActivity.this, MainActivity.this);
             }
         });
+        findViewById(R.id.button_wandoujia).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdateChecker.checkSync(UpdateChecker.Market.MARKET_WANDOUJIA, mEditTextPackageName.getText().toString(), MainActivity.this, MainActivity.this);
+            }
+        });
     }
 
     @Override

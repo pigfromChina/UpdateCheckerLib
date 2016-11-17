@@ -26,4 +26,9 @@
         android:text="查询Google Play"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/button_wandoujia"
+        android:text="查询豌豆荚"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

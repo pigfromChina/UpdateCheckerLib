@@ -44,7 +44,8 @@ public class UpdateChecker {
     }
     public enum Market {
         MARKET_COOLAPK,
-        MARKET_GOOGLEPLAY
+        MARKET_GOOGLEPLAY,
+        MARKET_WANDOUJIA
     }
     public interface OnCheckListener {
         void onStartCheck();
@@ -70,6 +71,11 @@ public class UpdateChecker {
                     changeLog += element.text();
                 }
                 info.mChangeLog = changeLog;
+                return info;
+            case MARKET_WANDOUJIA :
+                document = Jsoup.connect("http://www.wandoujia.com/apps/" + packageName).get();
+                info.mVersionName = document.select("div[class=con]").get(0).text().substring(3);
+                info.mChangeLog = document.select("div[class=con]").get(1).text();
                 return info;
         }
         return null;
