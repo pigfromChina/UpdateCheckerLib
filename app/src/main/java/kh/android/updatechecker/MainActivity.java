@@ -19,19 +19,22 @@ public class MainActivity extends AppCompatActivity implements UpdateChecker.OnC
         findViewById(R.id.button_coolapk).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UpdateChecker.checkSync(UpdateChecker.Market.MARKET_COOLAPK, mEditTextPackageName.getText().toString(), MainActivity.this, MainActivity.this);
+                new UpdateChecker().checkAsync(UpdateChecker.Market.MARKET_COOLAPK,
+                        mEditTextPackageName.getText().toString(), MainActivity.this);
             }
         });
         findViewById(R.id.button_googleplay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UpdateChecker.checkSync(UpdateChecker.Market.MARKET_GOOGLEPLAY, mEditTextPackageName.getText().toString(), MainActivity.this, MainActivity.this);
+                new UpdateChecker().checkAsync(UpdateChecker.Market.MARKET_GOOGLEPLAY,
+                        mEditTextPackageName.getText().toString(), MainActivity.this);
             }
         });
         findViewById(R.id.button_wandoujia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UpdateChecker.checkSync(UpdateChecker.Market.MARKET_WANDOUJIA, mEditTextPackageName.getText().toString(), MainActivity.this, MainActivity.this);
+                new UpdateChecker().checkAsync(UpdateChecker.Market.MARKET_WANDOUJIA,
+                        mEditTextPackageName.getText().toString(), MainActivity.this);
             }
         });
     }

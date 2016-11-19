@@ -1,7 +1,10 @@
 package kh.android.updatecheckerlib;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.support.annotation.RequiresPermission;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -51,6 +54,7 @@ public class UpdateChecker {
         void onStartCheck();
         void done (UpdateInfo info, Exception e);
     }
+    @RequiresPermission(Manifest.permission.INTERNET)
     public static UpdateInfo check (Market market, String packageName) throws IOException{
         Document document = null;
         UpdateInfo info = new UpdateInfo();
@@ -80,28 +84,65 @@ public class UpdateChecker {
         }
         return null;
     }
-    public static void checkSync (final Market market, final String packageName, final Context context, final OnCheckListener listener) {
-        listener.onStartCheck();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final UpdateInfo info = check(market, packageName);
-                    ((Activity)context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            listener.done(info, null);
-                        }
-                    });
-                } catch (final Exception e) {
-                    ((Activity)context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            listener.done(null, e);
-                        }
-                    });
-                }
+
+    private UpdateInfo info;
+    private OnCheckListener listener;
+    private CheckTask mTask;
+
+    public UpdateChecker (Market market, String packageName) {
+        info = new UpdateInfo();
+        info.mMarket = market;
+        info.mPackageName = packageName;
+    }
+    public UpdateChecker () {}
+    public UpdateChecker (UpdateInfo info) {
+        this.info = info;
+    }
+    @RequiresPermission(Manifest.permission.INTERNET)
+    public void checkAsync (final Market market, final String packageName, final OnCheckListener listener) {
+        this.listener = listener;
+        if (info == null) {
+            info = new UpdateInfo();
+            info.mMarket = market;
+            info.mPackageName = packageName;
+        }
+        mTask = new CheckTask();
+        mTask.execute();
+    }
+    public void checkAsync (OnCheckListener listener) {
+        this.listener = listener;
+        if (info == null)
+            throw new NullPointerException("Update Info mustn't null!");
+        mTask = new CheckTask();
+        mTask.execute();
+    }
+    public void stop () {
+        if (mTask != null)
+            mTask.cancel(true);
+    }
+
+    private class CheckTask extends AsyncTask<Void, Void, Object> {
+        @Override
+        protected Object doInBackground(Void... voids) {
+            try {
+                return check(info.getMarket(), info.getPackageName());
+            } catch (Exception e) {
+                return e;
             }
-        }).start();
+        }
+
+        @Override
+        protected void onPreExecute () {
+            listener.onStartCheck();
+        }
+
+        @Override
+        protected void onPostExecute (Object obj) {
+            if (obj instanceof UpdateInfo) {
+                listener.done((UpdateInfo)obj, null);
+            } else {
+                listener.done(null, (Exception)obj);
+            }
+        }
     }
 }
